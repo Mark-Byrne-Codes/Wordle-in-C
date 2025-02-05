@@ -1,19 +1,25 @@
-// wordle.txt
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 #include "wordle.h"
 
 // Function prototypes
-Results checkword(char *, char *);
+Result *checkword(char *, char *);
 Result checkchar(char,int,char *);
-int main();
+bool isin(char *, char);
+int main(int , char **);
 
 
-int main()
+int main(int argc, char **argv)
 {
-    printf("Welcome to Wordle!\n");
+    char *word;
+    char *guess;
+    Result *results;
+
+    word = "hello";
+    if (argc != 2)
+    {
+        printf("Usage: %s <word>\n", argv[0]);
+        return (1);
+    }
+    Results = check_word(argv[1], word);
 
     return (0);
 }
@@ -23,23 +29,17 @@ Result checkchar(char guess, int position, char *word)
     char correct;
 
     correct = word[position];
-    if (isin(word, guess, position))
-    {
+    if (guess == correct))
         return ResultGreen;
-    }
-    else if (isin(word, guess, position))
-    {
+    else if (isin(word, guess))
         return ResultYellow;
-    }
     else
-    {
         return ResultRed;
-    }
 }
 
-Results check_word(char *guess, char *word)
+Result *check_word(char *guess, char *word)
 {
-    Results results;
+    static Result results[5];
     int i;
 
     i = 0;
@@ -50,4 +50,19 @@ Results check_word(char *guess, char *word)
     }
 
     return results;
+}
+
+bool isin(char *word, char guess)
+{
+    int i;
+
+    i = 0;
+    while (i < 5)
+    {
+        if (word[i] == guess)
+            return true;
+        i++;
+    }
+
+    return false;
 }
