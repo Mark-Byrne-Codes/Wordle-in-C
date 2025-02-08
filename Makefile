@@ -3,7 +3,7 @@ NAME = wordle
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = wordle.c
+SRCS = wordle.c file.c input.c check_word.c utils.c
 
 OBJS = $(SRCS:.c=.o)
 
